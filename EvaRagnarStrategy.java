@@ -7,6 +7,7 @@ import gomoku.SimpleBoard;
 /**
  * Created by Ragnar on 09.05.2016.
  * v0.01 - downloaded templated, named class w/ Eva, now need to bring in miniMax stuff and score stuff.
+ * v0.02 - implemented minimax to return move also, not only score. now need to bring in searching for the scores.
  */
 public class EvaRagnarStrategy implements ComputerStrategy {
     private static final int WIN_COUNT = 5;
@@ -89,15 +90,20 @@ public class EvaRagnarStrategy implements ComputerStrategy {
         return true;
     }
 
+    /***/
     public class ScoredMove {
+        /***/
         public Location location;
+        /***/
         public int score;
 
+        /***/
         public ScoredMove(Location location, int score) {
             this.location = location;
             this.score = score;
         }
 
+        /***/
         public ScoredMove(int score) {
             this.score = score;
         }
