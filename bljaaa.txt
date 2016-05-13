@@ -1,0 +1,20 @@
+Alusta sellest, et tee valmis lihtne minimax (ilma alpha-betata) ja lihtne seisuhindaja, kus vaadatakse ainult seda, kas mõni osapooltest on võitnud: selleks võid vaadata praktikumides tehtud seisuhindamisi/minimaxi ja .
+Debugi see programm ära, mängides talle ise vastu. Tee katseid nii otsinguga sügavuseni kaks, kolm, neli jne, kuni otsiaeg läheb liiga suureks. Uuri lihtsalt, kas programm leiab üles ühekäigulise võidu, kahekäigulise võidu jne, ning kas ta suudab blokeerida sinu ühekäigulise võidu, kahekäigulise võidu jne.
+Seejärel asu täiustama seisuhindajat. Peamised ideed:
+Kas on viiest laual (otsene võit)?
+Loe kokku üleni lahtised neljased mõlema jaoks.
+Loe kokku poollahtised neljased mõlema jaoks.
+Loe kokku üleni lahtised kolmesed mõlema jaoks.
+Võibolla ka: Loe kokku poollahtised kolmesed.
+Võibolla ka: Loe kokku lahtised kahesed.
+Seisuhinne arvuta kokku nendest parameetritest, pannes võimsamatele ähvardustele kõvema koefitsiendi (üleni lahtine neljane on praktiliselt juba võit, lahtine kolmene aga veel mitte). Mõistlik võib olla viimati käija värvi ja järgmisena käjia värvi ähvardustele erinevate koefitsientide panemine: järgmisena käija ähvardused on hullemad (kui ta juba kaotanud pole)!
+Debugi täiustatud seisuhinne ära, mängides jälle ise vastu.
+Tee katseid aja-arvestusega ja määra otsingusügavus selline, et AK klassides kunagi ei mõeldaks üle ühe sekundi (NB! 20x20 laual on otsisügavus ilmselt väiksem, kui 10x10 laual).
+Nüüd peaks sinu programm olema piisavalt OK, võitmaks võrdlusprogrammi.
+Ideid, kuidas programmi veel palju paremaks teha:
+Vii sisse alpha-beta (modifitseeri minimaxi). Programm peaks leidma sama käigu, mis minimaxiga, aga rutem.
+Sundkäikude puhul (neljase sulgemine, võibolla ka lahtise kolmese otsa sulgemine) ära otsi kõiki muid alternatiive läbi, vaid vaata ainult sundkäike.
+Vali võimalikeks käikudeks ainult ruute, mis on mõne täidetud ruudu ligidal.
+Tee seisuhindamist selliselt, et enne lõppsügavusele jõudmist tehakse vahepealse seisu seisuhinne ja antakse see lõppsügavusele ette. Lõppsügavuse seis erineb aga ainult ühe välja poolest, seega saab hinde arvutada nii, et vaatad läbi ainult viimase käigu ümbruskonna ja modifitseerid üks aste kõrgemal saadud seisuhinnet vastavalt.
+Sundkäikude puhul, kus ainult üks valik, analüüsi sügavamale: unikaalne sundkäik ju ei laienda puud! Mh otsi sundkäikude ahelad lõpuni välja.
+Loe läbi lisaviited #Lisaviited
