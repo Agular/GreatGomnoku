@@ -9,6 +9,7 @@ import gomoku.SimpleBoard;
  * v0.01 - downloaded templated, named class w/ Eva, now need to bring in miniMax stuff and score stuff.
  * v0.02 - implemented minimax to return move also, not only score. now need to bring in searching for the scores.
  * v0.03 - can detect 5 in a row and 4 open row, soon will add others.
+ * v0.04 - added closed 4 rows, need to change counting system and therefore score too, will turn much faster after this.
  */
 public class EvaRagnarStrategy implements ComputerStrategy {
     /***/
@@ -95,7 +96,7 @@ public class EvaRagnarStrategy implements ComputerStrategy {
                 }
             }
         }
-        System.out.println(bestMove.location.getRow()+" "+bestMove.location.getColumn());
+        System.out.println(bestMove.location.getRow() + " " + bestMove.location.getColumn());
         return bestMove;
     }
 
@@ -120,32 +121,50 @@ public class EvaRagnarStrategy implements ComputerStrategy {
                             System.out.println("OPEN 4 ROW VERTICAL ");
                             score += SCORE_4_ROW_OPEN * playertype;
                         }
+                        if (row > 0 && inARow4Closed(row, col, 1, 0)) { // check vertical closed 4
+                            System.out.println("CLOSED 4 ROW VERTICAL ");
+                            score += SCORE_4_ROW_CLOSED * playertype;
+                        }
                         if (col >= WIN_COUNT - 1 && inARow5(row, col, 1, -1)) { // lets check vertical left diagonal 5
-                            System.out.println("verticalLEFT");
+                            System.out.println("verticalLEFT win");
                             score += SCORE_5_ROW * playertype;
                         }
-                        /*if (col > WIN_COUNT - 1 && row > 0 && inARow4Open(row, col, 1, -1)) { //vertical left open 4
+                        if (col >= WIN_COUNT - 1 && row > 0 && col < rows - 1 && inARow4Open(row, col, 1, -1)) { //vertical left open 4
                             System.out.println("OPEN 4 VERTICAL LEFT");
                             score += SCORE_4_ROW_OPEN * playertype;
-                        }*/
+                        }
+                        if (col >= WIN_COUNT - 1 && row > 0 && col < rows - 1 && inARow4Closed(row, col, 1, -1)) { //vertical left open 4
+                            System.out.println("ClOSED 4 VERTICAL LEFT");
+                            score += SCORE_4_ROW_CLOSED * playertype;
+                        }
+
                     }
                     if (col <= columns - WIN_COUNT) { // lets check right
                         if (inARow5(row, col, 0, 1)) { // lets check horizonal lineup 5
                             System.out.println("horizontalwin");
                             score += SCORE_5_ROW * playertype;
                         }
-                        if (col > 0 && inARow4Open(row, col, 0, 1)) {
+                        if (col > 0 && inARow4Open(row, col, 0, 1)) { // lets check horizontal open 4
                             System.out.println("OPEN 4 HORIZONTAL");
                             score += SCORE_4_ROW_OPEN * playertype;
+                        }
+                        if (col > 0 && inARow4Closed(row, col, 0, 1)) { // lets check horizontal closed 4
+                            System.out.println("CLOSED 4 HORIZONTAL");
+                            score += SCORE_4_ROW_CLOSED * playertype;
                         }
                         if (row <= rows - WIN_COUNT && inARow5(row, col, 1, 1)) { // lets check vertical right diagonal 5
                             System.out.println("verticalRIGHT");
                             score += SCORE_5_ROW * playertype;
                         }
-                        /*if (row > 0 && col <= columns - WIN_COUNT && inARow4Open(row, col, 1, 1)){ // vertical right open 4
+                        if (row > 0 && row <= rows - WIN_COUNT && col > 0 && inARow4Open(row, col, 1, 1)) { // vertical right open 4
                             System.out.println("OPEN 4 VERTICAL RIGHT");
                             score += SCORE_4_ROW_OPEN * playertype;
-                        }*/
+                        }
+                        if (row > 0 && row <= rows - WIN_COUNT && col > 0 && inARow4Closed(row, col, 1, 1)) { // vertical right closed 4
+                            System.out.println("CLOSED 4 VERTICAL RIGHT");
+                            score += SCORE_4_ROW_CLOSED * playertype;
+                        }
+
                     }
 
                 }
